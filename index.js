@@ -31,37 +31,53 @@ function playerChoice() {
 }
 
 
-function playRound(getPlayerChoices, getComputerChoices) {
+let playerScore = 0;
+let computerScore = 0;
+let roundWinner = '';
 
-  
+function playRound(getPlayerChoices, getComputerChoices) {
     playerChoice = getPlayerChoice();
     computerChoice = getComputerChoice();
   
     if (playerChoice === null || playerChoice === undefined)  {
         alert('Please enter a valid option!')
     }
-      else if (playerChoice === computerChoice) {
-       return console.log ('Tie game!');
-    } else if (playerChoice === 'rock' || computerChoice === 'paper') {
-       return console.log ('You Lose! Paper beats rock.');
-    } else if (playerChoice === 'rock' || computerChoice === 'scissors') {
-       return console.log ('You Win! Rock beats paper.');
-    } else if (playerChoice === 'paper' || computerChoice === 'rock') {
-       return console.log ('You Win! Rock beats paper.');
-    } else if (playerChoice === 'paper' || computerChoice === 'scissors') {
-       return console.log ('You Lose! Scissors beats paper.');
-    } else if (playerChoice === 'scissors' || computerChoice === 'rock') {
-       return console.log ('You Lose! Rock beats scissors.');
-    } else if (playerChoice === 'scissors' || computerChoice === 'paper'){
-       return console.log ('You Win! Scissors beats paper.');
+        if (playerChoice === computerChoice) {
+       return roundWinner = 'Tie';
+        }
+
+        if ( 
+        (playerChoice === 'rock' && computerChoice === 'scissors') ||
+         
+        (playerChoice === 'paper' && computerChoice === 'rock') ||
+         
+        (playerChoice === 'scissors' && computerChoice === 'paper') 
+        ) {
+            console.log('You win!')
+            playerScore++;
+        }
+        
+        if ( 
+            (computerChoice === 'rock' && playerChoice === 'scissors') ||
+             
+            (computerChoice === 'paper' && playerChoice === 'rock') ||
+             
+            (computerChoice === 'scissors' && playerChoice === 'paper') 
+        ) {
+            console.log('You lose!')
+            computerScore++;
     }
 }
 
-let results = [];
+
 
 function game() {
     for (let i = 0; i < 5; i++) {
         playRound();
     }
-    
+    if (playerScore > computerScore) {
+        alert('You won!')
+    } else {
+        alert('You lost')
+    }
 }
